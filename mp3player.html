@@ -1,0 +1,849 @@
+﻿<html lang="el">
+
+<head>
+    <meta charset="utf-8">
+    <title>Η Αγία Γραφή σε MP3 - Μετάφραση του Νεόφυτου Βάμβα | ebible.gr </title>
+    <meta name="description"content="Η Αγία Γραφή σε MP3 - Μετάφραση του Νεόφυτου Βάμβα">
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+
+
+
+
+    <style>
+
+        #header {
+            position: fixed;
+            width: 100%;
+            z-index: 905;
+            top: 0;
+            border-bottom: 1px solid rgba(0, 0, 0, .3);
+            box-shadow: -11px 12px 23px rgba(0, 0, 0, .1);
+            background-image: radial-gradient(at bottom center, #d67632 0%, #f78c40 100%);
+        }
+
+        #header>div {
+            height: 50px;
+        }
+
+        #logo {
+            margin-top: 0px;
+            margin-left: 13px;
+        }
+    </style>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            gap: 20px;
+            margin: 50px 0 0 0;
+        }
+
+        #left-column {
+            flex: 1;
+            padding: 10px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #right-column {
+            flex: 1;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            /* Gap between the boxes */
+            box-sizing: border-box;
+        }
+
+        /* Add box styling to separate the sections in both columns */
+        .box {
+            padding: 5px 15px 15px 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #mp3-list li,
+        #playlist-items li {
+            display: flex;
+            align-items: center;
+            padding: 5px 8px;
+            cursor: pointer;
+            margin-bottom: 4px;
+            border-bottom: 1px solid #eee;
+            font-size: 1rem;
+            /* Base font-size for desktop and laptop */
+        }
+
+        @media (max-width: 1024px) {
+
+            /* For tablets and small laptops */
+            #mp3-list li,
+            #playlist-items li {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            /* For mobile devices */
+            #mp3-list li,
+            #playlist-items li {
+                font-size: 1rem;
+            }
+        }
+
+        #mp3-list,
+        #playlist-items {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            overflow-y: auto;
+            scrollbar-color: #7f6f64 #f1f1f1;
+            /* No max-height by default for larger screens */
+        }
+
+        @media (max-width: 768px) {
+
+            #mp3-list,
+            #playlist-items {
+                max-height: 300px;
+                /* Restrict max height to 300px on mobile */
+            }
+        }
+
+
+
+
+
+        /* Scrollable MP3 list */
+        #mp3-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            overflow-y: auto;
+            /* The height will be set dynamically via JavaScript */
+        }
+
+
+
+        #mp3-list,
+        #playlist-items {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            overflow-y: auto;
+            /* No max-height by default for larger screens */
+        }
+
+        #mp3-list li button {
+            margin-right: 10px;
+            /* Space between button and the number */
+            padding: 0.3rem 0.5rem;
+            /* Padding adjusted for better readability */
+            font-size: 1rem;
+            /* Base font-size for desktop and laptop */
+            cursor: pointer;
+        }
+
+        @media (max-width: 1024px) {
+
+            /* For tablets and small laptops */
+            #mp3-list li button {
+                font-size: 1.0rem;
+                /* Slightly larger font size for tablets */
+                padding: 0.4rem 0.6rem;
+                /* Adjusted padding for better look */
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            /* For mobile devices */
+            #mp3-list li button {
+                font-size: 1.0rem;
+                /* Larger font size for mobile */
+                padding: 0.5rem 0.7rem;
+                /* Increased padding for touch devices */
+            }
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+
+        button {
+            background-color: #7f6f64;
+            color: white;
+            border: none;
+            padding: 0.4rem 0.4rem;
+            /* Padding adjusted for better readability */
+            font-size: 1rem;
+            /* Base font-size for desktop and laptop */
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        @media (max-width: 1024px) {
+
+            /* For tablets and small laptops */
+            button {
+                font-size: 1.0rem;
+                /* Slightly larger font size for tablets */
+                padding: 0.4rem 0.4rem;
+                /* Adjusted padding for a better look */
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            /* For mobile devices */
+            button {
+                font-size: 1.0rem;
+                /* Larger font size for mobile */
+                padding: 0.4rem 0.4rem;
+                /* Increase padding to match larger text */
+            }
+        }
+
+
+
+
+
+
+
+        button:hover {
+            background-color: #917d70;
+            /* Darker purple on hover */
+            transform: translateY(-2px);
+            /* Slight upward movement on hover */
+        }
+
+        button:active {
+            background-color: #4e443d;
+            /* Even darker purple when clicked */
+            transform: translateY(0);
+            /* Reset movement */
+        }
+
+
+
+        #current-playing {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+            text-transform: none;
+        }
+
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        /* Styling for <h3> with responsive font size */
+        h3 {
+            font-size: calc(0.9rem);
+            /* Base font-size of 1.5rem, growing with viewport width */
+            font-weight: bold;
+            color: #333;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #ccc;
+        }
+
+        /* Styling for labels with responsive font size */
+        label {
+            font-size: calc(0.7rem);
+            /* Base font-size of 0.875rem, growing with viewport width */
+            color: #555;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 2px;
+            display: block;
+        }
+
+        audio {
+            height: 25px;
+            outline: none;
+            border: 1px solid #007b9f;
+            /* Add a 2px solid border with the teal color */
+            border-radius: 8px;
+            /* Rounded corners for a modern look */
+            padding: 5px;
+            /* Add padding for a bit of spacing inside the border */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            /* Optional: Soft shadow for depth */
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            #left-column,
+            #right-column {
+                width: 100%;
+                padding: 5px;
+            }
+
+            h3 {
+                font-size: calc(0.9rem);
+                /* Larger heading for mobile */
+            }
+
+            label {
+                font-size: calc(0.75rem);
+                /* Larger label text for mobile */
+            }
+        }
+
+        /* CSS for the remove button */
+        /* Base styles for the remove button */
+        .remove-button {
+            padding: 0.0rem 0.4rem 0.0rem 0.4rem;
+            margin-right: 0.6rem;
+            cursor: pointer;
+            background-color: transparent;
+            border: none;
+            font-size: 1.2rem;
+            /* Base font size for desktop */
+            color: red;
+            outline: none;
+            transition: transform 0.2s ease, color 0.2s ease;
+            /* Smooth transition for hover and active states */
+        }
+
+        .remove-button:hover {
+            color: darkred;
+            transform: scale(1.1);
+            /* Slightly enlarge on hover */
+        }
+
+        .remove-button:active {
+            transform: scale(1);
+            /* Reset to original size on click */
+        }
+
+        /* Responsive adjustments for smaller screens (tablets and mobile) */
+        @media (max-width: 1024px) {
+            .remove-button {
+                font-size: 1rem;
+                /* Slightly smaller font for tablets */
+                padding: 0.15rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .remove-button {
+                font-size: 0.9rem;
+                /* Smaller font size for mobile devices */
+                padding: 0.1rem;
+                /* Reduce padding for a more compact look */
+                margin-right: 0.15rem;
+            }
+
+            .remove-button:hover {
+                transform: scale(1.05);
+                /* Slightly smaller scale on hover for mobile */
+            }
+        }
+
+        /* Base styles for the add-to-playlist button */
+        .add-button {
+            background-color: transparent;
+            border: none;
+            font-size: 1.0rem;
+            /* Default font size for desktop */
+            cursor: pointer;
+            color: green;
+            padding: 0.1rem;
+            margin-right: 0.5rem;
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+
+        .add-button:hover {
+            color: darkgreen;
+            transform: scale(1.1);
+            /* Slightly enlarge on hover */
+        }
+
+        .add-button:active {
+            transform: scale(1);
+            /* Reset size when clicked */
+        }
+
+        /* Responsive adjustments for tablets and small laptops */
+        @media (max-width: 1024px) {
+            .add-button {
+                font-size: 1rem;
+                /* Slightly smaller font size for tablets */
+                padding: 0.15rem;
+            }
+        }
+
+        /* Responsive adjustments for mobile devices */
+        @media (max-width: 768px) {
+            .add-button {
+                font-size: 0.9rem;
+                /* Smaller font size for mobile */
+                padding: 0.1rem;
+                margin-right: 0.3rem;
+                /* Reduce margin for smaller screens */
+            }
+
+            .add-button:hover {
+                transform: scale(1.05);
+                /* Slightly reduce hover effect for mobile */
+            }
+        }
+
+        /* Base style for the category text in the MP3 list */
+        .mp3-category {
+            font-style: italic;
+            /* Italicized to differentiate from the title */
+            font-size: 0.9rem;
+            /* Slightly smaller font size */
+            color: #888;
+            /* Light gray color */
+            margin-left: 5px;
+            /* Spacing from the title */
+        }
+
+        /* Adjustments for larger screens (desktops and laptops) */
+        @media (min-width: 1024px) {
+            .mp3-category {
+                font-size: 0.9rem;
+                /* Keep font size slightly smaller */
+            }
+        }
+
+        /* Adjustments for tablets */
+        @media (max-width: 1024px) and (min-width: 768px) {
+            .mp3-category {
+                font-size: 0.85rem;
+                /* Slightly smaller for tablets */
+            }
+        }
+
+        /* Adjustments for mobile devices */
+        @media (max-width: 768px) {
+            .mp3-category {
+                font-size: 0.8rem;
+                /* Smaller font size for mobile screens */
+                color: #666;
+                /* Slightly darker color for better readability on mobile */
+            }
+        }
+
+        #mp3-list {
+            background-color: #f9f9f9;
+            border: 1px solid #8dbdc7;
+        }
+
+        #playlist-items {
+            background-color: #f9f9f9;
+            border: 1px solid #8dbdc7;
+        }
+    </style>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-K94MZ59LX3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-K94MZ59LX3');
+</script>
+
+</head>
+
+<body class="smart-style-3 fixed-header ">
+
+    <header id="header">
+        <div id="logo-group">
+
+            <span id="logo"><a href="https://ebible.gr"><img src="logo.png" alt="ebible.gr" style="width:120px"></a></span>
+
+        </div>
+
+    </header>
+
+
+    <!-- Left Column: Wrapped in a box -->
+    <div id="left-column">
+        <div class="box" id="left-box">
+            <h3>Η ΑΓΙΑ ΓΡΑΦΗ ΣΕ MP3<br>ΜΕΤΑΦΡΑΣΗ ΝΕΟΦΥΤΟΥ ΒΑΜΒΑ</h3>
+            <label for="category">ΕΠΙΛΕΞΤΕ ΒΙΒΛΙΟ:</label>
+            <select id="category-filter">
+                <option value="all">Όλα τα Βιβλία</option>
+            </select>
+
+            <label for="search">ΑΝΑΖΗΤΗΣΗ ΚΕΦΑΛΑΙΟΥ:</label>
+            <input type="text" id="search" placeholder="Αναζήτηση κεφάλαιου...">
+
+
+            <ul id="mp3-list"></ul> <!-- Scrollable MP3 list -->
+        </div>
+    </div>
+
+    <!-- Right Column with 2 boxes -->
+    <div id="right-column">
+        <!-- First Box: Player Section -->
+        <div class="box" id="box-1">
+            <h3>Player</h3>
+            <div class="player-controls">
+                <audio id="player" controls></audio>
+                <button id="play-button">Play</button>
+                <button id="stop-button">Stop</button>
+            </div>
+
+            <!-- Additional Buttons in Box 1 -->
+            <div class="extra-controls">
+                <button id="random-play">Random Play</button>
+                <button id="play-playlist">Play Playlist</button>
+                <button id="clear-playlist">Clear Playlist</button>
+            </div>
+
+            <label id="current-playing">No mp3 is playing</label>
+            <div id="message-container" style="display: none; color: red;"></div>
+        </div>
+
+        <!-- Third Box: Playlist Section -->
+        <div class="box box-3" id="box-3">
+            <h3>Playlist</h3>
+            <ul id="playlist-items"></ul> <!-- Scrollable Playlist -->
+        </div>
+    </div>
+
+    <script>
+        // Function to adjust the height of the third box dynamically
+        function adjustBox3Height() {
+            const box1 = document.getElementById('box-1');
+            const box3 = document.getElementById('box-3');
+            const rightColumn = document.getElementById('right-column');
+
+            // Get the computed styles to account for padding, margin, and gap
+            const box1Styles = window.getComputedStyle(box1);
+            const rightColumnStyles = window.getComputedStyle(rightColumn);
+
+            // Calculate the total height occupied by box1, padding, and gaps
+            const box1Height = box1.offsetHeight + parseFloat(box1Styles.marginBottom);
+            const columnPaddingTop = parseFloat(rightColumnStyles.paddingTop);
+            const columnPaddingBottom = parseFloat(rightColumnStyles.paddingBottom);
+            const columnGap = parseFloat(rightColumnStyles.gap);
+
+            // Calculate the available height for box3
+            const availableHeight = window.innerHeight - (box1Height + columnPaddingTop + columnPaddingBottom + columnGap) - 80;
+
+            const availableHeight1 = availableHeight - 48;
+
+            // Set the height of box3
+            box3.style.height = `${availableHeight}px`;
+
+            const playlistItems = document.getElementById('playlist-items');
+            playlistItems.style.height = `${availableHeight1}px`;
+
+            const mp3List = document.getElementById('mp3-list');
+            mp3List.style.height = `${availableHeight+25}px`;
+        }
+
+        // Adjust the height of the mp3 list and box3 after the page loads
+        window.onload = function () {
+            adjustBox3Height();
+        };
+
+        // Rest of your existing code...
+        let mp3Files = [];
+        let filteredByCategory = [];  // Stores the MP3 files filtered by category
+        let playlist = JSON.parse(localStorage.getItem('playlist')) || [];  // Retrieve playlist from localStorage
+        const player = document.getElementById('player');
+        const currentPlayingLabel = document.getElementById('current-playing');  // Label to display current playing song
+        const playButton = document.getElementById('play-button');
+        const stopButton = document.getElementById('stop-button');
+        const searchInput = document.getElementById('search');  // Search input field
+        const categoryFilter = document.getElementById('category-filter');  // Category filter
+
+        let randomPlaying = false;  // To track random play mode
+
+        const categoryMap = {};
+
+        function loadCategoriesCSV() {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', 'mp3/books.csv', true);  // Adjust the path as needed
+
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    const csvText = xhr.responseText;
+                    parseCategoriesCSV(csvText);  // Parse and populate the categories
+                } else {
+                    console.error('Failed to load categories CSV file.');
+                }
+            };
+
+            xhr.onerror = function () {
+                console.error('Error during the XMLHttpRequest.');
+            };
+
+            xhr.send();
+        }
+
+        function parseCategoriesCSV(csvText) {
+            const rows = csvText.split('\n');
+            rows.slice(1).forEach(row => {
+                const [id, category] = row.split(',');
+                if (id && category) {
+                    categoryMap[parseInt(id)] = category.trim();
+                }
+            });
+
+            // After categories are loaded, populate the category dropdown
+            populateCategoryOptions();
+        }
+
+
+        // Function to load and parse the CSV file
+        async function loadCSV() {
+            const response = await fetch('mp3/mp3chapters.csv');  // Adjust the path as needed
+            const data = await response.text();
+            parseCSV(data);
+        }
+
+        // Parse the CSV data (semicolon-separated)
+        function parseCSV(csvText) {
+            const rows = csvText.split('\n');
+            const headers = rows[0].split(';');
+
+            mp3Files = rows.slice(1).map(row => {
+                const values = row.split(';');
+                return {
+                    number: values[0].toString().padStart(4, '0'),
+                    title: values[1],
+                    category_id: parseInt(values[2]),
+                    file: `mp3/${values[3]}`  // Path to mp3 folder
+                };
+            });
+
+            // Populate category filter options
+            populateCategoryOptions();
+
+            // Initially display all MP3s
+            filteredByCategory = mp3Files;  // Show all MP3s initially
+            displayMP3List(filteredByCategory);
+            displayPlaylist();
+        }
+
+        // Populate the category filter dropdown
+        function populateCategoryOptions() {
+            for (const [cid, cname] of Object.entries(categoryMap)) {
+                const option = document.createElement('option');
+                option.value = cid;
+                option.innerText = cname;
+                categoryFilter.appendChild(option);
+            }
+        }
+
+        // Normalize text to remove accents, convert to lowercase, and handle Greek characters
+        function normalizeText(text) {
+            return text
+                .normalize("NFD")  // Decompose accents
+                .replace(/[\u0300-\u036f]/g, "")  // Remove accents
+                .toLowerCase();  // Convert to lowercase
+        }
+
+        // Apply both category filter and search filter
+        function applyFilters() {
+            const query = normalizeText(searchInput.value);
+            const selectedCategory = categoryFilter.value;
+
+            // Filter by category
+            let filteredList = mp3Files.filter(mp3 => {
+                return selectedCategory === "all" || mp3.category_id == selectedCategory;
+            });
+
+            // Apply search filter on the already category-filtered list
+            filteredList = filteredList.filter(mp3 => {
+                const normalizedTitle = normalizeText(mp3.title);
+                return normalizedTitle.includes(query);
+            });
+
+            displayMP3List(filteredList);
+        }
+
+        // Function to display MP3 files list
+        function displayMP3List(files) {
+            const list = document.getElementById('mp3-list');
+            list.innerHTML = "";
+            files.forEach(mp3 => {
+                // Format the number to 4 digits with leading zeroes
+                const li = document.createElement('li');
+                // Added onclick to the title part to play the MP3
+                li.innerHTML = `<button class="add-button" onclick="addToPlaylist('${mp3.number}')">➕</button> <span onclick="play_MP3('${mp3.number}')"><span style="display:none">${mp3.number}. </span>${mp3.title}</span>`;
+                list.appendChild(li);
+            });
+        }
+
+        function addToPlaylist(mp3Number) {
+            const selectedMp3 = mp3Files.find(mp3 => mp3.number === mp3Number);
+
+            // Ensure selectedMp3 is found
+            if (selectedMp3) {
+                // Prevent adding duplicates
+                if (!playlist.find(mp3 => mp3.number === selectedMp3.number)) {
+                    playlist.push(selectedMp3);
+                    localStorage.setItem('playlist', JSON.stringify(playlist));  // Save playlist to localStorage
+                    displayPlaylist();  // Refresh playlist display
+                } else {
+                    // alert("This song is already in the playlist!");
+                    var messageContainer = document.getElementById('message-container');
+                    messageContainer.textContent = "This song is already in the playlist!";
+                    messageContainer.style.display = 'block'; // Show the message
+                    setTimeout(function () {
+                        messageContainer.style.display = 'none'; // Hide the message after 3 seconds
+                    }, 3000);
+                }
+            } else {
+                alert("MP3 file not found!");
+            }
+        }
+
+        function displayPlaylist() {
+            const playlistItems = document.getElementById('playlist-items');
+            playlistItems.innerHTML = ""; // Clear the current list
+
+            playlist.forEach(mp3 => {
+                const li = document.createElement('li');
+                li.innerHTML = `<button class="remove-button" onclick="removeFromPlaylist(${playlist.indexOf(mp3)})">&#128465;</button>
+                        <span onclick="play_MP3('${mp3.number}')"><span style="display:none;">${mp3.number}. </span>${mp3.title}</span>`;
+                playlistItems.appendChild(li);
+            });
+        }
+
+
+        // Function to remove an item from the playlist and localStorage
+        function removeFromPlaylist(index) {
+            playlist.splice(index, 1); // Remove the item from the playlist array
+
+            // Update localStorage with the new playlist
+            localStorage.setItem('playlist', JSON.stringify(playlist));
+
+            // Refresh the playlist display
+            displayPlaylist();
+        }
+
+        // Play the playlist sequentially
+        function playPlaylist() {
+            if (playlist.length > 0) {
+                let currentIndex = 0;
+                playMP3(playlist[currentIndex]);
+
+                // Play next song in playlist when current ends
+                player.onended = () => {
+                    currentIndex++;
+                    if (currentIndex < playlist.length) {
+                        playMP3(playlist[currentIndex]);
+                    }
+                };
+            } else {
+                alert("Playlist is empty!");
+            }
+        }
+
+        // Random Play: Play a random MP3 from the list
+        function randomPlay() {
+            if (mp3Files.length > 0) {
+                randomPlaying = true;
+                playRandomMP3();  // Start random play
+            }
+        }
+
+        // Function to play a random MP3
+        function playRandomMP3() {
+            const randomIndex = Math.floor(Math.random() * mp3Files.length);
+            playMP3(mp3Files[randomIndex]);
+
+            // Continue random play after current track finishes
+            player.onended = () => {
+                if (randomPlaying) {
+                    playRandomMP3();
+                }
+            };
+        }
+
+        //Play selected MP3 and update the label with the current playing title
+        function playMP3(mp3) {
+            player.src = mp3.file;
+            player.play();
+            currentPlayingLabel.textContent = `NOW PLAYING: ${mp3.title}`;
+        }
+
+        function play_MP3(mp3Number) {
+            const selectedMp3 = mp3Files.find(mp3 => mp3.number === mp3Number);
+            if (selectedMp3) {
+                player.src = selectedMp3.file;
+                player.play();
+                currentPlayingLabel.textContent = `NOW PLAYING: ${selectedMp3.title}`;
+            } else {
+                alert('MP3 not found');
+            }
+        }
+
+
+
+
+
+        // Event listener for Play button
+        playButton.addEventListener('click', () => {
+            player.play();
+        });
+
+        // Event listener for Stop button
+        stopButton.addEventListener('click', () => {
+            player.pause();
+            player.currentTime = 0;  // Reset to beginning
+        });
+
+        // Clear playlist
+        function clearPlaylist() {
+            playlist = [];
+            localStorage.removeItem('playlist');  // Clear from localStorage
+            displayPlaylist();
+        }
+
+        // Apply filters whenever the category or search input changes
+        categoryFilter.addEventListener('change', () => {
+            applyFilters();
+            // Scroll to the top of the mp3-list when the category changes
+            const mp3List = document.getElementById('mp3-list');
+            mp3List.scrollTop = 0;  // Scroll to the top of the list
+        });
+        searchInput.addEventListener('input', applyFilters);
+
+        // Event listeners for playlist controls
+        document.getElementById('play-playlist').addEventListener('click', playPlaylist);
+        document.getElementById('clear-playlist').addEventListener('click', clearPlaylist);
+
+        // Event listener for random play
+        document.getElementById('random-play').addEventListener('click', randomPlay);
+
+        // Load CSV and initialize
+        loadCategoriesCSV();
+        loadCSV();
+    </script>
+</body>
