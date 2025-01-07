@@ -83,7 +83,7 @@ This program provides a responsive web interface for playing Bible chapters in M
 1. Place the MP3 files in the designated folder (`mp3`).
 2. Ensure `mp3/books.csv` contains metadata for Holy Bible books (book id,book name).
 3. Ensure `mp3/mp3chapters.csv` contains metadata for MP3 files (number, title, book id, filename).
-4. Open the `index.html` file in a browser to access the player.
+4. Open the `mp3player.html` file in a browser to access the player.
 
 ---
 
