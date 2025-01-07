@@ -1,7 +1,7 @@
 
 # Holy Bible Audio Player in Greek - Vamvas Translation
 
-This repository contains programs designed to process YouTube video sources of the Vamvas translation from the YouTube channel [@ekxeradio](https://www.youtube.com/@ekxeradio). The Python programs convert the videos into MP3 files and split them into individual Bible chapters. The HTML program serves as a web-based MP3 player for these chapters. The audio version of the Holy Bible (Greek Vamvas Edition) is available on the web page [Vamvas audio](https://ebible.gr/mp3player.html).
+This repository contains programs designed to process YouTube video sources of the Vamvas translation from the YouTube channel [@ekxeradio](https://www.youtube.com/@ekxeradio). The Python programs convert the videos into MP3 files and split them into individual Bible chapters. The HTML program serves as a web-based MP3 player for these chapters. The audio version of the Holy Bible (Greek Vamvas Edition) is available on the web page [Vamvas audio](https://ebible.gr/vamvasaudio).
 
 **The repository also contains the converted MP3 files, which are located in the `mp3_ot` and `mp3_nt` folders**.
 
